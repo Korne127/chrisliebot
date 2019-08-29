@@ -1,0 +1,20 @@
+Punkte des Rework
+* Nur noch eine Instanz für den kompletten Bot
+* Einführung von Guilds, auf IRC werden die über die Instanz vorkonfiguriert, mit Regex. Ohne Match Fallback in Guild mit Channelnamen.
+
+# Einführung von Scope
+* global: boolean
+* guild: String
+* channel: String
+* user: String
+
+# Generalisierung von Commands als Listener
+Command wird eine Unterklasse von Listener. Listener Definitionen erfolgen global mit einem Bezeichnmer oder Inline innerhalb eines Scope Blocks. Ein Scope enthält daher eine Inline Definition oder eine Referenz auf eine globale Listener Definition. Ein Listener kann das Command Flag setzen, womit er auch als Command erkannt wird. Wird ein Command Listener über den Scope eingehangen, so wird intern automatisch erkannt, dass es sich ebenfalls um ein Command handelt und der Handler wird dem Command Dispatcher bekannt gemacht. Der Command Dispatcher existiert global und löst bei einem eingehenden Command automatisch über den Scope die letzte gültige Einhängung auf. Überdeckungen sind möglich und sollten über einen extra Debug Command auch angezeigt werden können.
+
+Listener und Commands werden daher im selben Array definiert und werden durch Prüfung der instanzierten Klasse auf Commandfähigkeit geprüft. Listener werden über Scopes eingehangen. Ein Listener kennt alle seine Scopes (erfordert Rückwärtsmapping).
+
+## Aliase
+In jedem Listener können Aliase definiert werden. Dies ist nur gültig, wenn der Listener ein auch ein Command ist. Wird der Listener nun referenziert, so werden automatisch diese Aliase übernommen. Zusätzlich können die Aliase überschrieben/erweitert werden.
+
+
+# Abstrakte Beispielconfig

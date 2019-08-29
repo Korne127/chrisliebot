@@ -1,0 +1,39 @@
+{
+	"defs": {
+		"home": {
+			"def": {
+				"type": "global-das ist nur implizit",
+				"clazz": "foo.bar.Home",
+				"config": "https://bit.ly/chrisliecode",
+				"help": "Die Hilfe ist optional und kann nun von der implementierenden Klasse auch selbst definiert werden."
+			},
+			"alias": [
+				"home"
+			],
+			"wenn alias = null, wird definition zum alias, wenn kein alias gewuensht, dann alias auf : []": null
+		}
+	},
+	"scopes": [
+		{
+			"scope": [
+				{"type": "global"},
+				{"type": "irc"},
+				{"type": "discord"}
+				// nur ein selector muss matchen, vermutlich wirds ein generischer selektor mit regex support f[r alle felder
+			],
+			"mapping": [
+				{"type": "ref", "ref": "home", "alias": ["+zuhause"]},
+				{
+					"type": "inline",
+					"def": {
+						"clazz": "foo.bar.Class",
+						"cfg": "Hallo und Willkommen"
+					},
+					"alias": [
+						"+hallo"
+					]
+				}
+			]
+		}
+	]
+}
